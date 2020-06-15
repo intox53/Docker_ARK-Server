@@ -2,10 +2,11 @@
 
 Docker build for managing an ARK: Survival Evolved server.
 
-This image uses [Ark Server Tools](https://github.com/FezVrasta/ark-server-tools) to manage an ark server and is forked from [turzam/ark](https://hub.docker.com/r/turzam/ark/).
+This image uses [Ark Server Tools](https://github.com/FezVrasta/ark-server-tools) to manage an ark server and is forked from [boerngen-schmidt/Ark-docker
+](https://hub.docker.com/r/moletrix/ark-survival-evolved-crossplay).
 
 *If you use an old volume, get the new arkmanager.cfg in the template directory.*  
-__Don't forget to use `docker pull boerngenschmidt/ark-docker` to get the latest version of the image__
+__Don't forget to use `docker pull moletrix/ark-survival-evolved-crossplay` to get the latest version of the image__
 
 ## Features
  - Easy install (no steamcmd / lib32... to install)
@@ -18,18 +19,18 @@ __Don't forget to use `docker pull boerngenschmidt/ark-docker` to get the latest
 
 ## Usage
 Fast & Easy server setup :   
-`docker run -d -p 7778:7778 -p 7778:7778/udp -p 27015:27015 -p 27015:27015/udp -e SESSIONNAME=myserver -e ADMINPASSWORD="mypasswordadmin" --name ark boerngenschmidt/ark-docker`
+`docker run -d -p 7778:7778 -p 7778:7778/udp -p 27015:27015 -p 27015:27015/udp -e SESSIONNAME=myserver -e ADMINPASSWORD="mypasswordadmin" --name ark moletrix/ark-survival-evolved-crossplay`
 
 You can map the ark volume to access config files :  
-`docker run -d -p 7778:7778 -p 7778:7778/udp -p 27015:27015 -p 27015:27015/udp -e SESSIONNAME=myserver -v /my/path/to/ark:/ark --name ark boerngenschmidt/ark-docker`  
+`docker run -d -p 7778:7778 -p 7778:7778/udp -p 27015:27015 -p 27015:27015/udp -e SESSIONNAME=myserver -v /my/path/to/ark:/ark --name ark moletrix/ark-survival-evolved-crossplay`  
 Then you can edit */my/path/to/ark/arkmanager.cfg* (the values override GameUserSetting.ini) and */my/path/to/ark/[GameUserSetting.ini/Game.ini]*
 
 You can manager your server with rcon if you map the rcon port (you can rebind the rcon port with docker):  
-`docker run -d -p 7778:7778 -p 7778:7778/udp -p 27015:27015 -p 27015:27015/udp -p 32330:32330  -e SESSIONNAME=myserver --name ark boerngenschmidt/ark-docker`  
+`docker run -d -p 7778:7778 -p 7778:7778/udp -p 27015:27015 -p 27015:27015/udp -p 32330:32330  -e SESSIONNAME=myserver --name ark moletrix/ark-survival-evolved-crossplay`  
 
 You can change server and steam port to allow multiple servers on same host:  
 *(You can't just rebind the port with docker. It won't work, you need to change STEAMPORT & SERVERPORT variable)*
-`docker run -d -p 7779:7779 -p 7779:7779/udp -p 27016:27016 -p 27016:27016/udp -p 32331:32330  -e SESSIONNAME=myserver2 -e SERVERPORT=27016 -e STEAMPORT=7779 --name ark2 boerngenschmidt/ark-docker`  
+`docker run -d -p 7779:7779 -p 7779:7779/udp -p 27016:27016 -p 27016:27016/udp -p 32331:32330  -e SESSIONNAME=myserver2 -e SERVERPORT=27016 -e STEAMPORT=7779 --name ark2 moletrix/ark-survival-evolved-crossplay`  
 
 You can check your server with :  
 `docker exec ark arkmanager status` 
@@ -85,7 +86,7 @@ To add mods, you only need to change the variable ark_GameModIds in *arkmanager.
   -e ADMINPASSWORD="mypasswordadmin" \
   -e TZ=Europe/Berlin \
   -v /my/path/to/ark:/ark \
-  boerngenschmidt/ark-docker
+  moletrix/ark-survival-evolved-crossplay
   ```
 - Wait for ark to be downloaded installed and launched, then Ctrl+C to stop the server.
 - Edit */my/path/to/ark/GameUserSetting.ini and Game.ini*
@@ -132,40 +133,3 @@ To add mods, you only need to change the variable ark_GameModIds in *arkmanager.
 + Port : __STEAMPORT__ : Steam port (default: 7778)
 + Port : __SERVERPORT__ : server port (default: 27015)
 + Port : __32330__ : rcon port
-
-## Known issues
-Currently none
-
-## Changelog
-+ 1.0 : 
-  - Initial image : works with Ark Server tools 1.3
-  - Add auto-update & auto-backup  
-+ 1.1 :  
-  - Works with Ark Server Tools 1.4 [See changelog here](https://github.com/FezVrasta/ark-server-tools/releases/tag/v1.4)
-  - Handle mods && auto update mods
-+ 1.2 :
-  - Remove variable AUTOBACKUP & AUTOUPDATE 
-  - Remove variable WARNMINUTE (can now be find in arkmanager.cfg)
-  - Add crontab support
-  - You can now config crontab with the file /your/ark/path/crontab
-  - Add template directory with default config files.
-  - Add documentation on TZ variable.
-+ 1.3 :
-  - Add BACKUPONSTOP to backup the server when you stop the server (thanks to [fkoester](https://github.com/fkoester))
-  - Add WARNONSTOP to add warning message when you stop the server (default: 60 min)
-  - Works with Ark Server Tools v1.5
-    - Compressing backups so they take up less space
-    - Downloading updates to a staging directory before applying
-    - Added support for automatically updating on restart
-    - Show a spinner when updating
-  - Add UID & GID to set the uid & gid of the user used in the container (and permissions on the volume /ark)
-+ 1.4 : **Maintainer switch**
-  - changed from ubuntu to centOS 7
-  - added timezone support
-  - image now always pulls latest Ark Server Tools
-  - renamed NBPLAYERS to MAX_PLAYERS
-  - added prefixc ARK_ to UID & GID to not have conflicts with arkmanager
-  - added auto upgrading of arkmanager
-+ 1.5 :
-  - fixed arkmanager upgrade
-
