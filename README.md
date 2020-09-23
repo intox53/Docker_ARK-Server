@@ -2,7 +2,7 @@
 
 Docker build for managing an ARK: Survival Evolved server.
 
-This image uses [Ark Server Tools](https://github.com/FezVrasta/ark-server-tools) to manage an ark server and is forked from [boerngen-schmidt/Ark-docker
+This image uses [Ark Server Tools](https://github.com/FezVrasta/ark-server-tools) to manage an ark server and is forked from [moletrix/ark-survival-evolved-crossplay
 ](https://hub.docker.com/r/moletrix/ark-survival-evolved-crossplay).
 
 *If you use an old volume, get the new arkmanager.cfg in the template directory.*  
