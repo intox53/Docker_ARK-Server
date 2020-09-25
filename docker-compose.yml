@@ -9,6 +9,7 @@ ark:
     - ADMINPASSWORD=adminpassword
     - SERVERPORT=27015
     - STEAMPORT=7778
+    - QUERYPORT=7777
     - BACKUPONSTART=1
     - BACKUPONSTOP=1
     - WARNONSTOP=1
@@ -21,6 +22,8 @@ ark:
   ports:
    - 7778:7778/udp
    - 7778:7778
+   - 7777:7777/udp
+   - 7777:7777
    - 27015:27015/udp
    - 27015:27015
    - 32330:32330
