@@ -47,3 +47,6 @@ fabric.properties
 .gitignore
 .idea/
 Ark-docker.iml
+
+# Debugging
+debug.log
