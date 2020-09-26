@@ -1,12 +1,17 @@
-# ARK: Survival Evolved - Docker
+# ARK: Survival Evolved - Docker image for Plesk
 
-Docker build for managing an ARK: Survival Evolved server.
+## General Information
 
+This Docker image was created after working around some quirks when setting up an Ark server on Plesk, as the Plesk UI is not (yet) able to expose ports at runtime. Long Story short: Plesk cannot `EXPOSE` ports dynamically from `ENV` variables and always uses the default.
+
+**Credits:**
 This image uses [Ark Server Tools](https://github.com/FezVrasta/ark-server-tools) to manage an ark server and is forked from [moletrix/ark-survival-evolved-crossplay
-](https://hub.docker.com/r/moletrix/ark-survival-evolved-crossplay).
+](https://hub.docker.com/r/moletrix/ark-survival-evolved-crossplay). For Instructions on how to run Ark in a Docker outside of Plesk, please see [moletrix/ark-survival-evolved-crossplay
+](https://hub.docker.com/r/moletrix/ark-survival-evolved-crossplay). 
 
-*If you use an old volume, get the new arkmanager.cfg in the template directory.*  
-__Don't forget to use `docker pull moletrix/ark-survival-evolved-crossplay` to get the latest version of the image__
+
+## Installation on Plesk
+
 
 ## Features
  - Easy install (no steamcmd / lib32... to install)
